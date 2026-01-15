@@ -10,6 +10,7 @@
 | [Apache HTTP Server](02-apache.md) | World's most widely used web server - virtual hosts, SSL, proxying |
 | [SQL Basics](03-sql.md) | Structured Query Language for relational databases |
 | [Ansible](04-ansible.md) | Agentless automation - playbooks, roles, inventory, modules |
+| [Ceph Storage](05-ceph.md) | Distributed storage - RBD, CephFS, RGW, Kubernetes integration |
 
 ## Quick Reference
 
@@ -22,6 +23,7 @@
 | Static website | Apache | 80/443 |
 | Reverse proxy | Apache/Nginx | 80/443 |
 | Store structured data | MySQL/PostgreSQL | 3306/5432 |
+| Distributed storage | Ceph | 6789/6800+ |
 
 ### Common Commands
 

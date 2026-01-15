@@ -68,6 +68,7 @@ A comprehensive guide covering Kubernetes, Containers, and Linux System Administ
 | [Apache HTTP Server](services/02-apache.md) | Web server - virtual hosts, SSL, reverse proxy |
 | [SQL Basics](services/03-sql.md) | MySQL, PostgreSQL queries and administration |
 | [Ansible](services/04-ansible.md) | Agentless automation - playbooks, roles, inventory |
+| [Ceph Storage](services/05-ceph.md) | Distributed storage - RBD, CephFS, S3, Kubernetes |
 
 ### Part 6: Programming & Scripting
 > **What it is:** Programming languages commonly used in DevOps, system administration, and automation.
