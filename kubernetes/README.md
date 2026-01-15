@@ -13,6 +13,7 @@
 | [04-networking.md](04-networking.md) | Networking | Pod networking, Services, DNS |
 | [05-openshift.md](05-openshift.md) | OpenShift | Red Hat's enterprise Kubernetes platform |
 | [06-troubleshooting.md](06-troubleshooting.md) | Troubleshooting | Debug commands and techniques |
+| [07-must-gather.md](07-must-gather.md) | must-gather | OpenShift diagnostic data collection |
 
 ## Key Concepts
 

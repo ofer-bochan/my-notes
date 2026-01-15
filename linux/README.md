@@ -20,6 +20,12 @@
 | [11-performance.md](11-performance.md) | Performance | top, htop, iostat |
 | [12-security.md](12-security.md) | Security | SELinux, permissions |
 | [13-bash.md](13-bash.md) | Bash Scripting | Loops, awk, sed |
+| [14-shell-config.md](14-shell-config.md) | Shell Config | .bashrc, .bash_profile, aliases |
+| [15-password-recovery.md](15-password-recovery.md) | Password Recovery | Reset root password via GRUB |
+| [16-find-grep-commands.md](16-find-grep-commands.md) | find & grep | Search files and text |
+| [17-vi-editor.md](17-vi-editor.md) | Vi Editor | Basic vi/vim commands |
+| [18-troubleshooting.md](18-troubleshooting.md) | Troubleshooting | Disk space, sosreport |
+| [19-scripts.md](19-scripts.md) | Scripts | Practical shell scripts |
 
 ## Quick Reference
 
