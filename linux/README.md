@@ -14,7 +14,7 @@
 | [05-filesystems.md](05-filesystems.md) | Filesystems | ext4, xfs, mounting, fstab |
 | [06-hardware.md](06-hardware.md) | Hardware | CPU, memory, PCI, USB info |
 | [07-system-config.md](07-system-config.md) | System Config | hostname, timezone, sysctl |
-| [08-networking.md](08-networking.md) | Networking | ip, NetworkManager, firewall |
+| [08-networking.md](08-networking.md) | Networking | nmcli, ip, ifconfig, ethtool, tcpdump, ss, iperf3, TRex, nmap, nstat |
 | [09-logs.md](09-logs.md) | Logging | journalctl, dmesg, log files |
 | [10-systemd.md](10-systemd.md) | Systemd | Services, timers, boot |
 | [11-performance.md](11-performance.md) | Performance | top, htop, iostat |

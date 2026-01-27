@@ -39,7 +39,7 @@ A comprehensive guide covering Kubernetes, Containers, and Linux System Administ
 | [Filesystems](linux/05-filesystems.md) | ext4, xfs, btrfs, mounting, fstab |
 | [Hardware Information](linux/06-hardware.md) | CPU, memory, disk, PCI, USB info |
 | [System Configuration](linux/07-system-config.md) | Hostname, timezone, sysctl, kernel modules |
-| [Networking](linux/08-networking.md) | ip commands, NetworkManager, DNS, firewall |
+| [Networking](linux/08-networking.md) | nmcli, ip, ifconfig, ethtool, tcpdump, iperf3, TRex, nmap |
 | [Logs and Logging](linux/09-logs.md) | journalctl, dmesg, log files, rotation |
 | [Systemd and Services](linux/10-systemd.md) | Service management, timers, boot targets |
 | [Performance Monitoring](linux/11-performance.md) | top, htop, iostat, vmstat |
