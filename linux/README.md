@@ -26,6 +26,7 @@
 | [17-vi-editor.md](17-vi-editor.md) | Vi Editor | Basic vi/vim commands |
 | [18-troubleshooting.md](18-troubleshooting.md) | Troubleshooting | Disk space, sosreport |
 | [19-scripts.md](19-scripts.md) | Scripts | Practical shell scripts |
+| [20-proc-and-modules.md](20-proc-and-modules.md) | /proc, Modules & Hardware | lsmod, lspci, dmidecode, /proc filesystem |
 
 ## Quick Reference
 

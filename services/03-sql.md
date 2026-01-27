@@ -452,6 +452,207 @@ CREATE USER username WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
 ```
 
+## Views
+
+> **What it is:** A view is a virtual table based on a SELECT query. Simplifies complex queries and controls data access.
+
+```sql
+-- Create view
+CREATE VIEW active_customers AS
+SELECT id, name, email FROM customers WHERE status = 'active';
+
+-- Use view
+SELECT * FROM active_customers;
+
+-- Create view with join
+CREATE VIEW order_details AS
+SELECT o.id, c.name AS customer, p.name AS product, oi.quantity
+FROM orders o
+JOIN customers c ON o.customer_id = c.id
+JOIN order_items oi ON o.id = oi.order_id
+JOIN products p ON oi.product_id = p.id;
+
+-- Drop view
+DROP VIEW IF EXISTS active_customers;
+```
+
+## Indexes
+
+> **What it is:** Indexes speed up data retrieval by creating a structure for quick row lookup.
+
+```sql
+-- Create index
+CREATE INDEX idx_email ON customers(email);
+
+-- Composite index
+CREATE INDEX idx_order_date ON orders(customer_id, order_date);
+
+-- Unique index
+CREATE UNIQUE INDEX idx_unique_email ON customers(email);
+
+-- Drop index
+DROP INDEX idx_email ON customers;
+
+-- Show indexes
+SHOW INDEX FROM customers;         -- MySQL
+\di                                -- PostgreSQL
+```
+
+## Triggers
+
+> **What it is:** A trigger is a stored procedure that automatically executes on INSERT, UPDATE, or DELETE events.
+
+### MySQL Triggers
+
+```sql
+-- Update timestamp on change
+DELIMITER //
+CREATE TRIGGER update_timestamp
+BEFORE UPDATE ON customers
+FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = NOW();
+END//
+DELIMITER ;
+
+-- Audit log trigger
+DELIMITER //
+CREATE TRIGGER audit_changes
+AFTER UPDATE ON customers
+FOR EACH ROW
+BEGIN
+    INSERT INTO audit_log (table_name, record_id, old_email, new_email, changed_at)
+    VALUES ('customers', OLD.id, OLD.email, NEW.email, NOW());
+END//
+DELIMITER ;
+
+-- Prevent delete
+DELIMITER //
+CREATE TRIGGER prevent_delete_active
+BEFORE DELETE ON customers
+FOR EACH ROW
+BEGIN
+    IF OLD.status = 'active' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot delete active customers';
+    END IF;
+END//
+DELIMITER ;
+
+-- Show triggers
+SHOW TRIGGERS;
+
+-- Drop trigger
+DROP TRIGGER IF EXISTS update_timestamp;
+```
+
+### PostgreSQL Triggers
+
+```sql
+-- Create function first
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create trigger
+CREATE TRIGGER update_timestamp
+BEFORE UPDATE ON customers
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp();
+
+-- Drop trigger
+DROP TRIGGER IF EXISTS update_timestamp ON customers;
+```
+
+## Stored Procedures
+
+> **What it is:** A stored procedure is a reusable set of SQL statements stored in the database.
+
+### MySQL
+
+```sql
+-- Simple procedure
+DELIMITER //
+CREATE PROCEDURE get_active_customers()
+BEGIN
+    SELECT * FROM customers WHERE status = 'active';
+END//
+DELIMITER ;
+
+-- Call procedure
+CALL get_active_customers();
+
+-- Procedure with parameters
+DELIMITER //
+CREATE PROCEDURE get_customer_orders(IN cust_id INT)
+BEGIN
+    SELECT * FROM orders WHERE customer_id = cust_id;
+END//
+DELIMITER ;
+
+CALL get_customer_orders(123);
+
+-- Procedure with output
+DELIMITER //
+CREATE PROCEDURE count_orders(IN cust_id INT, OUT total INT)
+BEGIN
+    SELECT COUNT(*) INTO total FROM orders WHERE customer_id = cust_id;
+END//
+DELIMITER ;
+
+CALL count_orders(123, @count);
+SELECT @count;
+
+-- Drop procedure
+DROP PROCEDURE IF EXISTS get_active_customers;
+```
+
+### PostgreSQL
+
+```sql
+CREATE OR REPLACE PROCEDURE update_status(p_id INT, p_status VARCHAR)
+LANGUAGE plpgsql AS $$
+BEGIN
+    UPDATE customers SET status = p_status WHERE id = p_id;
+END;
+$$;
+
+CALL update_status(123, 'inactive');
+```
+
+## Transactions
+
+> **What it is:** A transaction is a sequence of operations performed as a single unit - all succeed or all fail.
+
+```sql
+-- Basic transaction
+START TRANSACTION;
+
+INSERT INTO orders (customer_id, total) VALUES (1, 100.00);
+UPDATE customers SET last_order = NOW() WHERE id = 1;
+
+COMMIT;  -- Save changes
+
+-- Rollback on error
+START TRANSACTION;
+INSERT INTO orders (customer_id, total) VALUES (1, 100.00);
+ROLLBACK;  -- Undo all changes
+
+-- Savepoints
+START TRANSACTION;
+INSERT INTO orders (customer_id, total) VALUES (1, 100.00);
+SAVEPOINT order_created;
+
+INSERT INTO order_items (order_id, product_id) VALUES (1, 5);
+ROLLBACK TO SAVEPOINT order_created;  -- Undo only items
+
+COMMIT;
+```
+
 ## Quick Reference
 
 | Operation | SQL |
@@ -462,8 +663,10 @@ GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
 | Delete | `DELETE FROM t WHERE condition` |
 | Join | `SELECT * FROM t1 JOIN t2 ON t1.id=t2.fk` |
 | Group | `SELECT col, COUNT(*) FROM t GROUP BY col` |
-| Sort | `SELECT * FROM t ORDER BY col DESC` |
-| Limit | `SELECT * FROM t LIMIT 10 OFFSET 20` |
+| View | `CREATE VIEW v AS SELECT * FROM t` |
+| Index | `CREATE INDEX idx ON t(col)` |
+| Trigger | `CREATE TRIGGER name BEFORE UPDATE ON t ...` |
+| Procedure | `CREATE PROCEDURE name() BEGIN ... END` |
 
 ---
 

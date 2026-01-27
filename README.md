@@ -51,6 +51,7 @@ A comprehensive guide covering Kubernetes, Containers, and Linux System Administ
 | [Vi Editor](linux/17-vi-editor.md) | Basic vi/vim editor commands |
 | [Troubleshooting](linux/18-troubleshooting.md) | Disk space analysis, sosreport |
 | [Practical Scripts](linux/19-scripts.md) | Ready-to-use shell scripts |
+| [/proc, Modules & Hardware](linux/20-proc-and-modules.md) | lsmod, lspci, dmidecode, /proc filesystem |
 
 ### Part 4: Git Version Control
 > **What it is:** Git is a distributed version control system for tracking changes, collaborating on code, and maintaining project history.
