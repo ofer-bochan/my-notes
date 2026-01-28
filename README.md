@@ -71,7 +71,15 @@ A comprehensive guide covering Kubernetes, Containers, and Linux System Administ
 | [Ansible](services/04-ansible.md) | Agentless automation - playbooks, roles, inventory |
 | [Ceph Storage](services/05-ceph.md) | Distributed storage - RBD, CephFS, S3, Kubernetes |
 
-### Part 6: Programming & Scripting
+### Part 6: OpenShift Container Platform
+> **What it is:** OpenShift is Red Hat's enterprise Kubernetes distribution with additional features for security, developer productivity, and operational management.
+
+| Topic | Description |
+|-------|-------------|
+| [OCP Overview](ocp/README.md) | OpenShift-specific features, operators, installation methods |
+| [Two-Node HA with Fencing](ocp/01-two-node-fencing.md) | High availability cluster with Pacemaker fencing for edge deployments |
+
+### Part 7: Programming & Scripting
 > **What it is:** Programming languages commonly used in DevOps, system administration, and automation.
 
 | Topic | Description |
